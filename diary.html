@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rajveer & Swarali - Our Private Digital Memories Diary">
+    <title>Rajveer & Swarali – Our Memories Diary</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* ==================== GLOBAL RESET & BASE STYLES ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #fff5f7 50%, #ffe8f0 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* ==================== FLOATING HEARTS BACKGROUND ==================== */
+        .floating-hearts-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 1.5rem;
+            color: rgba(255, 105, 180, 0.2);
+            animation: floatUp 20s infinite ease-in-out;
+        }
+
+        .floating-heart:nth-child(1) {
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .floating-heart:nth-child(2) {
+            left: 15%;
+            animation-delay: 3s;
+        }
+
+        .floating-heart:nth-child(3) {
+            left: 30%;
+            animation-delay: 6s;
+        }
+
+        .floating-heart:nth-child(4) {
+            left: 45%;
+            animation-delay: 2s;
+        }
+
+        .floating-heart:nth-child(5) {
+            left: 60%;
+            animation-delay: 8s;
+        }
+
+        .floating-heart:nth-child(6) {
+            left: 75%;
+            animation-delay: 4s;
+        }
+
+        .floating-heart:nth-child(7) {
+            left: 85%;
+            animation-delay: 10s;
+        }
+
+        .floating-heart:nth-child(8) {
+            left: 95%;
+            animation-delay: 5s;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.6;
+            }
+
+            90% {
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translateY(-100vh) rotate(360deg) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* ==================== HEADER STYLES ==================== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 1.5rem 5%;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(255, 105, 180, 0.15);
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glowText 3s ease-in-out infinite;
+        }
+
+        @keyframes glowText {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 5px rgba(255, 107, 157, 0.3));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 15px rgba(255, 107, 157, 0.6));
+            }
+        }
+
+        .header p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+            font-style: italic;
+        }
+
+        /* ==================== MAIN CONTAINER ==================== */
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 120px 20px 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* ==================== UPLOAD SECTION ==================== */
+        .upload-section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(255, 107, 157, 0.15);
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .upload-section h2 {
+            font-family: 'Playfair Display', serif;
+            color: #ff6b9d;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .form-group input[type="file"] {
+            display: none;
+        }
+
+        .file-upload-btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.3);
+        }
+
+        .file-upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+        }
+
+        .image-preview-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .preview-image-wrapper {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .preview-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .remove-preview {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #ff6b9d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .remove-preview:hover {
+            background: #ff6b9d;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ffe8f0;
+            border-radius: 15px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            resize: vertical;
+            min-height: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ff6b9d;
+            box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+        }
+
+        .love-note-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .love-note-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #ff6b9d;
+        }
+
+        .love-note-checkbox label {
+            cursor: pointer;
+            color: #ff6b9d;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .post-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.3);
+        }
+
+        .post-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+        }
+
+        .post-btn:active {
+            transform: translateY(0);
+        }
+
+        /* ==================== LOVE NOTES TOGGLE ==================== */
+        .love-notes-toggle {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .toggle-btn {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .toggle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+        }
+
+        /* ==================== POSTS FEED ==================== */
+        .posts-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .post-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease-out forwards;
+            transition: all 0.3s ease;
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(255, 107, 157, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Love Note Post Styling */
+        .post-card.love-note {
+            background: linear-gradient(135deg, #fff9e6 0%, #ffe8f0 100%);
+            border: 2px solid #ffd700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+            animation: glowPulse 2s ease-in-out infinite, fadeInUp 0.6s ease-out forwards;
+        }
+
+        @keyframes glowPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+            }
+        }
+
+        .love-note-badge {
+            background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            animation: shimmer 2s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        /* Image Gallery Slider */
+        .post-images {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+
+        .image-slider {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+
+        .image-slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #ff6b9d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .slider-nav:hover {
+            background: #ff6b9d;
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-nav.prev {
+            left: 10px;
+        }
+
+        .slider-nav.next {
+            right: 10px;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: white;
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        /* Post Content */
+        .post-content {
+            padding: 1.5rem;
+        }
+
+        .post-timestamp {
+            color: #999;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .post-caption {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        /* Comments Section */
+        .comments-section {
+            border-top: 1px solid #f0f0f0;
+            padding-top: 1rem;
+        }
+
+        .comments-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+        }
+
+        .comment {
+            background: #f9f9f9;
+            padding: 0.8rem;
+            border-radius: 10px;
+            margin-bottom: 0.8rem;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: #ff6b9d;
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        .comment-text {
+            color: #555;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .comment-time {
+            color: #999;
+            font-size: 0.75rem;
+            margin-top: 0.3rem;
+        }
+
+        .add-comment {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
+        .add-comment input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: 2px solid #ffe8f0;
+            border-radius: 25px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .add-comment input:focus {
+            outline: none;
+            border-color: #ff6b9d;
+            box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+        }
+
+        .comment-btn {
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .comment-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
+        }
+
+        /* ==================== SPARKLE ANIMATION ==================== */
+        .sparkle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .sparkle {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: sparkleFloat 2s ease-out forwards;
+        }
+
+        @keyframes sparkleFloat {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(0);
+            }
+
+            50% {
+                transform: translateY(-100px) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-200px) scale(0);
+            }
+        }
+
+        /* ==================== EMPTY STATE ==================== */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .empty-state p {
+            font-size: 1.1rem;
+        }
+
+        /* ==================== RESPONSIVE DESIGN ==================== */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .header p {
+                font-size: 0.8rem;
+            }
+
+            .container {
+                padding: 100px 15px 30px;
+            }
+
+            .upload-section {
+                padding: 1.5rem;
+            }
+
+            .upload-section h2 {
+                font-size: 1.3rem;
+            }
+
+            .image-preview-container {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+                gap: 0.8rem;
+            }
+
+            .post-content {
+                padding: 1rem;
+            }
+
+            .add-comment {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .add-comment input,
+            .comment-btn {
+                width: 100%;
+            }
+        }
+
+        /* ==================== SCROLLBAR STYLING ==================== */
+        .comments-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .comments-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .comments-list::-webkit-scrollbar-thumb {
+            background: #ff6b9d;
+            border-radius: 10px;
+        }
+
+        .comments-list::-webkit-scrollbar-thumb:hover {
+            background: #c44569;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==================== FLOATING HEARTS BACKGROUND ==================== -->
+    <div class="floating-hearts-bg">
+        <div class="floating-heart">💕</div>
+        <div class="floating-heart">💖</div>
+        <div class="floating-heart">💗</div>
+        <div class="floating-heart">💕</div>
+        <div class="floating-heart">💖</div>
+        <div class="floating-heart">💗</div>
+        <div class="floating-heart">💕</div>
+        <div class="floating-heart">💖</div>
+    </div>
+
+    <!-- ==================== SPARKLE CONTAINER ==================== -->
+    <div class="sparkle-container" id="sparkleContainer"></div>
+
+    <!-- ==================== HEADER ==================== -->
+    <header class="header">
+        <h1>Rajveer & Swarali – Our Memories Diary</h1>
+        <p>Where every moment becomes a cherished memory 💕</p>
+    </header>
+
+    <!-- ==================== MAIN CONTAINER ==================== -->
+    <div class="container">
+
+        <!-- ==================== UPLOAD SECTION ==================== -->
+        <div class="upload-section">
+            <h2>✨ Create New Memory</h2>
+
+            <div class="form-group">
+                <label for="imageUpload">Upload Images</label>
+                <label for="imageUpload" class="file-upload-btn">📷 Choose Images</label>
+                <input type="file" id="imageUpload" accept="image/*" multiple>
+                <div class="image-preview-container" id="imagePreviewContainer"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="caption">Caption</label>
+                <textarea id="caption" placeholder="Write something beautiful about this memory..."></textarea>
+            </div>
+
+            <div class="love-note-checkbox">
+                <input type="checkbox" id="loveNoteCheckbox">
+                <label for="loveNoteCheckbox">💌 Mark as Love Note</label>
+            </div>
+
+            <button class="post-btn" onclick="createPost()">💕 Post Memory</button>
+        </div>
+
+        <!-- ==================== LOVE NOTES TOGGLE ==================== -->
+        <div class="love-notes-toggle">
+            <button class="toggle-btn" id="toggleLoveNotes" onclick="toggleLoveNotes()">
+                ✨ Show Only Love Notes
+            </button>
+        </div>
+
+        <!-- ==================== POSTS FEED ==================== -->
+        <div class="posts-feed" id="postsFeed">
+            <div class="empty-state">
+                <div class="empty-state-icon">📸</div>
+                <p>No memories yet. Start creating your first memory together!</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+        // ========== DATA STORAGE ==========
+        let posts = [];
+        let selectedImages = [];
+        let showOnlyLoveNotes = false;
+
+        // ========== IMAGE UPLOAD & PREVIEW ==========
+        document.getElementById('imageUpload').addEventListener('change', function (e) {
+            const files = Array.from(e.target.files);
+
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    selectedImages.push(event.target.result);
+                    renderImagePreviews();
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+
+        // Render image previews before posting
+        function renderImagePreviews() {
+            const container = document.getElementById('imagePreviewContainer');
+            container.innerHTML = '';
+
+            selectedImages.forEach((imgSrc, index) => {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'preview-image-wrapper';
+
+                const img = document.createElement('img');
+                img.src = imgSrc;
+
+                const removeBtn = document.createElement('button');
+                removeBtn.className = 'remove-preview';
+                removeBtn.innerHTML = '×';
+                removeBtn.onclick = () => removePreviewImage(index);
+
+                wrapper.appendChild(img);
+                wrapper.appendChild(removeBtn);
+                container.appendChild(wrapper);
+            });
+        }
+
+        // Remove image from preview
+        function removePreviewImage(index) {
+            selectedImages.splice(index, 1);
+            renderImagePreviews();
+        }
+
+        // ========== CREATE POST FUNCTION ==========
+        function createPost() {
+            const caption = document.getElementById('caption').value.trim();
+            const isLoveNote = document.getElementById('loveNoteCheckbox').checked;
+
+            // Validation
+            if (selectedImages.length === 0) {
+                alert('Please upload at least one image!');
+                return;
+            }
+
+            if (!caption) {
+                alert('Please write a caption!');
+                return;
+            }
+
+            // Create post object
+            const post = {
+                id: Date.now(),
+                images: [...selectedImages],
+                caption: caption,
+                isLoveNote: isLoveNote,
+                timestamp: new Date(),
+                comments: [],
+                currentImageIndex: 0
+            };
+
+            // Add to posts array (newest first)
+            posts.unshift(post);
+
+            // Reset form
+            selectedImages = [];
+            document.getElementById('caption').value = '';
+            document.getElementById('loveNoteCheckbox').checked = false;
+            document.getElementById('imageUpload').value = '';
+            renderImagePreviews();
+
+            // Trigger sparkle animation
+            createSparkles();
+
+            // Render posts
+            renderPosts();
+
+            // Scroll to new post
+            setTimeout(() => {
+                const firstPost = document.querySelector('.post-card');
+                if (firstPost) {
+                    firstPost.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 100);
+        }
+
+        // ========== SPARKLE ANIMATION ON POST CREATION ==========
+        function createSparkles() {
+            const container = document.getElementById('sparkleContainer');
+            const sparkleEmojis = ['✨', '💖', '⭐', '💫', '🌟'];
+
+            for (let i = 0; i < 15; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.textContent = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 0.5 + 's';
+
+                container.appendChild(sparkle);
+
+                // Remove after animation
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 2000);
+            }
+        }
+
+        // ========== TOGGLE LOVE NOTES FILTER ==========
+        function toggleLoveNotes() {
+            showOnlyLoveNotes = !showOnlyLoveNotes;
+            const btn = document.getElementById('toggleLoveNotes');
+
+            if (showOnlyLoveNotes) {
+                btn.textContent = '📝 Show All Memories';
+            } else {
+                btn.textContent = '✨ Show Only Love Notes';
+            }
+
+            renderPosts();
+        }
+
+        // ========== RENDER POSTS FEED ==========
+        function renderPosts() {
+            const feed = document.getElementById('postsFeed');
+
+            // Filter posts based on love notes toggle
+            const filteredPosts = showOnlyLoveNotes
+                ? posts.filter(post => post.isLoveNote)
+                : posts;
+
+            // Empty state
+            if (filteredPosts.length === 0) {
+                feed.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">${showOnlyLoveNotes ? '💌' : '📸'}</div>
+                        <p>${showOnlyLoveNotes ? 'No love notes yet. Mark your special memories as love notes!' : 'No memories yet. Start creating your first memory together!'}</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Render posts
+            feed.innerHTML = '';
+            filteredPosts.forEach((post, index) => {
+                const postCard = createPostCard(post, index);
+                feed.appendChild(postCard);
+            });
+        }
+
+        // ========== CREATE POST CARD ELEMENT ==========
+        function createPostCard(post, index) {
+            const card = document.createElement('div');
+            card.className = `post-card ${post.isLoveNote ? 'love-note' : ''}`;
+            card.style.animationDelay = `${index * 0.1}s`;
+
+            // Love note badge
+            const loveNoteBadge = post.isLoveNote
+                ? '<div class="love-note-badge">💌 LOVE NOTE 💌</div>'
+                : '';
+
+            // Image gallery with slider
+            const imagesHTML = createImageGallery(post);
+
+            // Format timestamp
+            const timeAgo = getTimeAgo(post.timestamp);
+
+            // Comments HTML
+            const commentsHTML = createCommentsSection(post);
+
+            card.innerHTML = `
+                ${loveNoteBadge}
+                ${imagesHTML}
+                <div class="post-content">
+                    <div class="post-timestamp">⏰ ${timeAgo}</div>
+                    <div class="post-caption">${escapeHtml(post.caption)}</div>
+                    ${commentsHTML}
+                </div>
+            `;
+
+            return card;
+        }
+
+        // ========== CREATE IMAGE GALLERY WITH SLIDER ==========
+        function createImageGallery(post) {
+            if (post.images.length === 1) {
+                return `
+                    <div class="post-images">
+                        <img src="${post.images[0]}" alt="Memory">
+                    </div>
+                `;
+            }
+
+            const imagesHTML = post.images.map(img =>
+                `<img src="${img}" alt="Memory">`
+            ).join('');
+
+            const dotsHTML = post.images.map((_, i) =>
+                `<span class="dot ${i === post.currentImageIndex ? 'active' : ''}" onclick="goToSlide(${post.id}, ${i})"></span>`
+            ).join('');
+
+            return `
+                <div class="post-images">
+                    <div class="image-slider" id="slider-${post.id}">
+                        ${imagesHTML}
+                    </div>
+                    <button class="slider-nav prev" onclick="changeSlide(${post.id}, -1)">‹</button>
+                    <button class="slider-nav next" onclick="changeSlide(${post.id}, 1)">›</button>
+                    <div class="slider-dots">
+                        ${dotsHTML}
+                    </div>
+                </div>
+            `;
+        }
+
+        // ========== IMAGE SLIDER FUNCTIONS ==========
+        function changeSlide(postId, direction) {
+            const post = posts.find(p => p.id === postId);
+            if (!post) return;
+
+            post.currentImageIndex += direction;
+
+            if (post.currentImageIndex < 0) {
+                post.currentImageIndex = post.images.length - 1;
+            } else if (post.currentImageIndex >= post.images.length) {
+                post.currentImageIndex = 0;
+            }
+
+            updateSlider(postId);
+        }
+
+        function goToSlide(postId, index) {
+            const post = posts.find(p => p.id === postId);
+            if (!post) return;
+
+            post.currentImageIndex = index;
+            updateSlider(postId);
+        }
+
+        function updateSlider(postId) {
+            const post = posts.find(p => p.id === postId);
+            if (!post) return;
+
+            const slider = document.getElementById(`slider-${postId}`);
+            if (slider) {
+                slider.style.transform = `translateX(-${post.currentImageIndex * 100}%)`;
+            }
+
+            renderPosts();
+        }
+
+        // ========== CREATE COMMENTS SECTION ==========
+        function createCommentsSection(post) {
+            const commentsListHTML = post.comments.map(comment => `
+                <div class="comment">
+                    <div class="comment-author">${escapeHtml(comment.author)}</div>
+                    <div class="comment-text">${escapeHtml(comment.text)}</div>
+                    <div class="comment-time">${getTimeAgo(comment.timestamp)}</div>
+                </div>
+            `).join('');
+
+            return `
+                <div class="comments-section">
+                    <div class="comments-list">
+                        ${commentsListHTML}
+                    </div>
+                    <div class="add-comment">
+                        <input type="text" placeholder="Add a comment..." id="comment-input-${post.id}" onkeypress="handleCommentKeyPress(event, ${post.id})">
+                        <button class="comment-btn" onclick="addComment(${post.id})">💬 Comment</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ========== ADD COMMENT FUNCTION ==========
+        function addComment(postId) {
+            const input = document.getElementById(`comment-input-${postId}`);
+            const commentText = input.value.trim();
+
+            if (!commentText) {
+                alert('Please write a comment!');
+                return;
+            }
+
+            const post = posts.find(p => p.id === postId);
+            if (!post) return;
+
+            // Determine author (alternating between Rajveer and Swarali)
+            const authors = ['Rajveer', 'Swarali'];
+            const author = authors[post.comments.length % 2];
+
+            const comment = {
+                id: Date.now(),
+                author: author,
+                text: commentText,
+                timestamp: new Date()
+            };
+
+            post.comments.push(comment);
+            input.value = '';
+
+            renderPosts();
+
+            // Scroll to new comment
+            setTimeout(() => {
+                const commentsList = input.closest('.comments-section').querySelector('.comments-list');
+                commentsList.scrollTop = commentsList.scrollHeight;
+            }, 100);
+        }
+
+        // Handle Enter key for comments
+        function handleCommentKeyPress(event, postId) {
+            if (event.key === 'Enter') {
+                addComment(postId);
+            }
+        }
+
+        // ========== UTILITY FUNCTIONS ==========
+
+        // Get time ago string
+        function getTimeAgo(date) {
+            const seconds = Math.floor((new Date() - date) / 1000);
+
+            if (seconds < 60) return 'Just now';
+            if (seconds < 3600) return `${Math.floor(seconds / 60)} minutes ago`;
+            if (seconds < 86400) return `${Math.floor(seconds / 3600)} hours ago`;
+            if (seconds < 604800) return `${Math.floor(seconds / 86400)} days ago`;
+
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // ========== INITIALIZE ==========
+        // Render initial empty state
+        renderPosts();
+
+        // Add some demo data (optional - remove if not needed)
+        // Uncomment below to add sample posts
+        /*
+        setTimeout(() => {
+            selectedImages = ['https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?w=800'];
+            document.getElementById('caption').value = 'Our first adventure together! 💕';
+            document.getElementById('loveNoteCheckbox').checked = true;
+            createPost();
+        }, 1000);
+        */
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Tracker - Rajveer & Swarali</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #fff5f7 50%, #ffe8f0 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(255, 105, 180, 0.15);
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .back-btn {
+            padding: 0.6rem 1.5rem;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 100px 20px 40px;
+        }
+
+        .mood-selector {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(255, 107, 157, 0.15);
+            text-align: center;
+        }
+
+        .mood-selector h2 {
+            font-family: 'Playfair Display', serif;
+            color: #ff6b9d;
+            margin-bottom: 1.5rem;
+        }
+
+        .mood-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mood-btn {
+            background: white;
+            border: 3px solid #ffe8f0;
+            border-radius: 15px;
+            padding: 1rem;
+            font-size: 3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mood-btn:hover {
+            transform: scale(1.1);
+            border-color: #ff6b9d;
+        }
+
+        .mood-btn.selected {
+            border-color: #ff6b9d;
+            background: #fff5f7;
+            transform: scale(1.1);
+        }
+
+        .save-mood-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .mood-history {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(255, 107, 157, 0.15);
+        }
+
+        .mood-history h3 {
+            font-family: 'Playfair Display', serif;
+            color: #ff6b9d;
+            margin-bottom: 1.5rem;
+        }
+
+        .mood-entry {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #f9f9f9;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .mood-entry-emoji {
+            font-size: 2rem;
+        }
+
+        .mood-entry-info {
+            flex: 1;
+            margin-left: 1rem;
+        }
+
+        .mood-entry-date {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .mood-entry-time {
+            color: #999;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>😊 Mood Tracker</h1>
+        <a href="home.html" class="back-btn">← Back</a>
+    </div>
+
+    <div class="container">
+
+        <div class="mood-selector">
+            <h2>How are you feeling today?</h2>
+            <div class="mood-options">
+                <button class="mood-btn" data-mood="😊" onclick="selectMood('😊')">😊</button>
+                <button class="mood-btn" data-mood="😍" onclick="selectMood('😍')">😍</button>
+                <button class="mood-btn" data-mood="🥰" onclick="selectMood('🥰')">🥰</button>
+                <button class="mood-btn" data-mood="😢" onclick="selectMood('😢')">😢</button>
+                <button class="mood-btn" data-mood="😴" onclick="selectMood('😴')">😴</button>
+                <button class="mood-btn" data-mood="🤗" onclick="selectMood('🤗')">🤗</button>
+            </div>
+            <button class="save-mood-btn" onclick="saveMood()">💕 Save Mood</button>
+        </div>
+
+        <div class="mood-history">
+            <h3>Mood History</h3>
+            <div id="moodHistory"></div>
+        </div>
+
+    </div>
+
+    <script>
+        let selectedMood = null;
+        let moods = [];
+
+        const savedMoods = localStorage.getItem('moodTracker');
+        if (savedMoods) {
+            moods = JSON.parse(savedMoods).map(m => ({
+                ...m,
+                date: new Date(m.date)
+            }));
+        }
+
+        function selectMood(mood) {
+            selectedMood = mood;
+            document.querySelectorAll('.mood-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            document.querySelector(`[data-mood="${mood}"]`).classList.add('selected');
+        }
+
+        function saveMood() {
+            if (!selectedMood) {
+                alert('Please select a mood!');
+                return;
+            }
+
+            const mood = {
+                emoji: selectedMood,
+                date: new Date()
+            };
+
+            moods.unshift(mood);
+            localStorage.setItem('moodTracker', JSON.stringify(moods));
+
+            selectedMood = null;
+            document.querySelectorAll('.mood-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+
+            renderMoods();
+        }
+
+        function renderMoods() {
+            const history = document.getElementById('moodHistory');
+            history.innerHTML = '';
+
+            if (moods.length === 0) {
+                history.innerHTML = '<p style="text-align: center; color: #999;">No moods recorded yet</p>';
+                return;
+            }
+
+            moods.forEach(mood => {
+                const entry = document.createElement('div');
+                entry.className = 'mood-entry';
+
+                entry.innerHTML = `
+                    <div class="mood-entry-emoji">${mood.emoji}</div>
+                    <div class="mood-entry-info">
+                        <div class="mood-entry-date">${formatDate(mood.date)}</div>
+                        <div class="mood-entry-time">${formatTime(mood.date)}</div>
+                    </div>
+                `;
+
+                history.appendChild(entry);
+            });
+        }
+
+        function formatDate(date) {
+            return new Date(date).toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            });
+        }
+
+        function formatTime(date) {
+            return new Date(date).toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        renderMoods();
+    </script>
+</body>
+
+</html>

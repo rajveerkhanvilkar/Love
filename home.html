@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rajveer & Swarali - Love Hub</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #fff5f7 50%, #ffe8f0 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Floating Hearts Background */
+        .floating-hearts-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 2rem;
+            animation: floatUp 15s infinite ease-in-out;
+        }
+
+        .floating-heart:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
+            color: rgba(255, 105, 180, 0.3);
+        }
+
+        .floating-heart:nth-child(2) {
+            left: 25%;
+            animation-delay: 2s;
+            color: rgba(255, 182, 193, 0.3);
+        }
+
+        .floating-heart:nth-child(3) {
+            left: 40%;
+            animation-delay: 4s;
+            color: rgba(255, 105, 180, 0.3);
+        }
+
+        .floating-heart:nth-child(4) {
+            left: 55%;
+            animation-delay: 1s;
+            color: rgba(255, 182, 193, 0.3);
+        }
+
+        .floating-heart:nth-child(5) {
+            left: 70%;
+            animation-delay: 3s;
+            color: rgba(255, 105, 180, 0.3);
+        }
+
+        .floating-heart:nth-child(6) {
+            left: 85%;
+            animation-delay: 5s;
+            color: rgba(255, 182, 193, 0.3);
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.8;
+            }
+
+            90% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glowPulse 3s ease-in-out infinite;
+            margin-bottom: 0.5rem;
+        }
+
+        @keyframes glowPulse {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 10px rgba(255, 107, 157, 0.4));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.8));
+            }
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        /* Navigation Grid */
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .nav-card {
+            background: white;
+            border-radius: 25px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(255, 107, 157, 0.15);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 157, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-card:hover::before {
+            left: 100%;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(255, 107, 157, 0.3);
+        }
+
+        .nav-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .nav-card:nth-child(1) .nav-icon {
+            animation-delay: 0s;
+        }
+
+        .nav-card:nth-child(2) .nav-icon {
+            animation-delay: 0.2s;
+        }
+
+        .nav-card:nth-child(3) .nav-icon {
+            animation-delay: 0.4s;
+        }
+
+        .nav-card:nth-child(4) .nav-icon {
+            animation-delay: 0.6s;
+        }
+
+        .nav-card:nth-child(5) .nav-icon {
+            animation-delay: 0.8s;
+        }
+
+        .nav-card:nth-child(6) .nav-icon {
+            animation-delay: 1s;
+        }
+
+        .nav-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #ff6b9d;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-card p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .nav-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .nav-card {
+                padding: 2rem;
+            }
+
+            .logout-btn {
+                position: static;
+                margin-top: 0;
+                margin-bottom: 1rem;
+                display: inline-block;
+                padding: 0.5rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        .logout-btn {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.2);
+            z-index: 100;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 157, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="floating-hearts-bg">
+        <div class="floating-heart">💕</div>
+        <div class="floating-heart">💖</div>
+        <div class="floating-heart">💗</div>
+        <div class="floating-heart">💕</div>
+        <div class="floating-heart">💖</div>
+        <div class="floating-heart">💗</div>
+    </div>
+
+    <div class="header">
+        <button onclick="logout()" class="logout-btn">🚪 Logout</button>
+        <h1>Rajveer & Swarali</h1>
+        <p>Our Love Universe 💕</p>
+    </div>
+
+    <div class="nav-container">
+        <div class="nav-grid">
+
+            <a href="memories.html" class="nav-card">
+                <span class="nav-icon">📸</span>
+                <h3>Memory Diary</h3>
+                <p>Upload and cherish our beautiful moments together with photos and love notes</p>
+            </a>
+
+            <a href="activities.html" class="nav-card">
+                <span class="nav-icon">🎯</span>
+                <h3>Couple Activities</h3>
+                <p>Fun challenges, date ideas, and activities to strengthen our bond</p>
+            </a>
+
+            <a href="timeline.html" class="nav-card">
+                <span class="nav-icon">⏰</span>
+                <h3>Our Timeline</h3>
+                <p>Journey through our love story from the first day to forever</p>
+            </a>
+
+            <a href="bucket-list.html" class="nav-card">
+                <span class="nav-icon">✨</span>
+                <h3>Bucket List</h3>
+                <p>Dreams we want to achieve together and places we want to explore</p>
+            </a>
+
+            <a href="love-letters.html" class="nav-card">
+                <span class="nav-icon">💌</span>
+                <h3>Love Letters</h3>
+                <p>Heartfelt messages and letters expressing our deepest feelings</p>
+            </a>
+
+            <a href="mood-tracker.html" class="nav-card">
+                <span class="nav-icon">😊</span>
+                <h3>Mood Tracker</h3>
+                <p>Track our daily moods and see how we make each other happy</p>
+            </a>
+
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script>
+        // Check authentication on page load
+        if (!requireAuth()) {
+            // User will be redirected to login by requireAuth()
+        }
+
+        // Logout function is already imported from api.js
+    </script>
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Letters - Rajveer & Swarali</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #fff5f7 50%, #ffe8f0 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(255, 105, 180, 0.15);
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .back-btn {
+            padding: 0.6rem 1.5rem;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 100px 20px 40px;
+        }
+
+        .write-section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(255, 107, 157, 0.15);
+        }
+
+        .write-section h2 {
+            font-family: 'Playfair Display', serif;
+            color: #ff6b9d;
+            margin-bottom: 1rem;
+        }
+
+        .write-section input,
+        .write-section textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ffe8f0;
+            border-radius: 15px;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 1rem;
+        }
+
+        .write-section textarea {
+            min-height: 150px;
+            resize: vertical;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .write-section input:focus,
+        .write-section textarea:focus {
+            outline: none;
+            border-color: #ff6b9d;
+        }
+
+        .send-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+        }
+
+        .letters-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .letter-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .letter-card::before {
+            content: '💌';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 3rem;
+            opacity: 0.1;
+        }
+
+        .letter-from {
+            font-weight: 600;
+            color: #ff6b9d;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .letter-date {
+            color: #999;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .letter-text {
+            font-family: 'Playfair Display', serif;
+            color: #555;
+            line-height: 2;
+            font-size: 1.05rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>💌 Love Letters</h1>
+        <a href="home.html" class="back-btn">← Back</a>
+    </div>
+
+    <div class="container">
+
+        <div class="write-section">
+            <h2>Write a Love Letter</h2>
+            <input type="text" id="authorInput" placeholder="Your name (Rajveer/Swarali)">
+            <textarea id="letterInput" placeholder="Pour your heart out..."></textarea>
+            <button class="send-btn" onclick="sendLetter()">💕 Send Letter</button>
+        </div>
+
+        <div class="letters-grid" id="lettersGrid"></div>
+
+    </div>
+
+    <script>
+        let letters = [
+            {
+                id: 1,
+                from: 'Rajveer',
+                text: 'My dearest Swarali, every moment with you feels like a beautiful dream. Your smile lights up my world, and your love gives me strength. I promise to cherish you forever.',
+                date: new Date('2024-01-15')
+            },
+            {
+                id: 2,
+                from: 'Swarali',
+                text: 'Dear Rajveer, you are my safe haven, my best friend, and my greatest love. Thank you for being the person who understands me completely. I love you more than words can express.',
+                date: new Date('2024-02-14')
+            }
+        ];
+
+        const savedLetters = localStorage.getItem('loveLetters');
+        if (savedLetters) {
+            letters = JSON.parse(savedLetters).map(l => ({
+                ...l,
+                date: new Date(l.date)
+            }));
+        }
+
+        function sendLetter() {
+            const author = document.getElementById('authorInput').value.trim();
+            const text = document.getElementById('letterInput').value.trim();
+
+            if (!author || !text) {
+                alert('Please fill in both fields!');
+                return;
+            }
+
+            const letter = {
+                id: Date.now(),
+                from: author,
+                text: text,
+                date: new Date()
+            };
+
+            letters.unshift(letter);
+            localStorage.setItem('loveLetters', JSON.stringify(letters));
+
+            document.getElementById('authorInput').value = '';
+            document.getElementById('letterInput').value = '';
+
+            renderLetters();
+            createHearts();
+        }
+
+        function renderLetters() {
+            const grid = document.getElementById('lettersGrid');
+            grid.innerHTML = '';
+
+            letters.forEach(letter => {
+                const card = document.createElement('div');
+                card.className = 'letter-card';
+
+                card.innerHTML = `
+                    <div class="letter-from">From: ${letter.from}</div>
+                    <div class="letter-date">${formatDate(letter.date)}</div>
+                    <div class="letter-text">${letter.text}</div>
+                `;
+
+                grid.appendChild(card);
+            });
+        }
+
+        function formatDate(date) {
+            return new Date(date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        function createHearts() {
+            const hearts = ['💕', '💖', '💗', '💝'];
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.position = 'fixed';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = '100%';
+                heart.style.fontSize = '2rem';
+                heart.style.zIndex = '9999';
+                heart.style.pointerEvents = 'none';
+                heart.style.animation = 'floatUp 3s ease-out forwards';
+                document.body.appendChild(heart);
+
+                setTimeout(() => heart.remove(), 3000);
+            }
+        }
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatUp {
+                to {
+                    transform: translateY(-100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        renderLetters();
+    </script>
+</body>
+
+</html>

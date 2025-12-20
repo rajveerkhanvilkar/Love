@@ -1,0 +1,22 @@
+# Ignore heavy folders
+node_modules
+android
+ios
+.git
+.gradle
+.idea
+tmp
+
+# Ignore build artifacts
+build
+dist
+coverage
+*.apk
+*.aab
+*.log
+*.zip
+
+# Ignore local config
+.env.local
+.DS_Store
+Thumbs.db

@@ -1,0 +1,11 @@
+node_modules/
+.env
+*.log
+.DS_Store
+android/
+ios/
+firebase-service-account.json
+my-release-key.keystore
+key.properties
+.vercel
+.env*.local

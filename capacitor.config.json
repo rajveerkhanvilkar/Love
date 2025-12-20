@@ -1,0 +1,24 @@
+{
+    "appId": "com.rajveer.swarali.diary",
+    "appName": "Rajveer & Swarali Love Diary",
+    "webDir": "www",
+    "server": {
+        "url": "https://couples-diary.vercel.app",
+        "androidScheme": "https"
+    },
+    "plugins": {
+        "PushNotifications": {
+            "presentationOptions": [
+                "badge",
+                "sound",
+                "alert"
+            ]
+        },
+        "SplashScreen": {
+            "launchShowDuration": 2000,
+            "backgroundColor": "#ffeef8",
+            "androidSplashResourceName": "splash",
+            "showSpinner": false
+        }
+    }
+}
