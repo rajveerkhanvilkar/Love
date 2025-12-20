@@ -50,12 +50,42 @@ app.use(session({
 app.use(express.static(__dirname));
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-    .then(() => console.log('✅ Connected to MongoDB'))
-    .catch(err => console.error('❌ MongoDB connection error:', err));
+// MongoDB Connection Handling
+let cachedDb = null;
+
+async function connectToDatabase() {
+    if (mongoose.connection.readyState === 1) {
+        return mongoose.connection;
+    }
+
+    try {
+        console.log('⏳ Connecting to MongoDB...');
+        const conn = await mongoose.connect(process.env.MONGODB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            serverSelectionTimeoutMS: 5000,
+        });
+        console.log('✅ MongoDB Connected Successfully');
+        return conn;
+    } catch (error) {
+        console.error('❌ MongoDB Connection Error:', error);
+        throw error;
+    }
+}
+
+// Ensure DB is connected before processing requests
+app.use(async (req, res, next) => {
+    try {
+        await connectToDatabase();
+        next();
+    } catch (error) {
+        console.error('Database middleware error:', error);
+        res.status(503).json({
+            error: 'Database connection failed',
+            details: error.message
+        });
+    }
+});
 
 // ==================== SCHEMAS ====================
 

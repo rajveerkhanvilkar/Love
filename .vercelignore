@@ -20,3 +20,10 @@ coverage
 .env.local
 .DS_Store
 Thumbs.db
+
+# Ignore Gradle/Android heavy folders
+wrapper
+caches
+daemon
+jdks
+native
