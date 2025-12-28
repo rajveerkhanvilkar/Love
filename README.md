@@ -1,4 +1,4 @@
-# 💕 Rajveer & Swarali - Love Diary Application
+# Love Diary Application
 
 A beautiful, full-stack couples diary application with authentication, database storage, and real-time synchronization between partners.
 
@@ -242,3 +242,4 @@ This project is for personal use by Rajveer & Swarali.
 ---
 
 Made with 💕 by Rajveer & Swarali
+
